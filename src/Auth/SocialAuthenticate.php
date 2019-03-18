@@ -284,12 +284,11 @@ class SocialAuthenticate extends BaseAuthenticate
         }
 
         $authParams = $this->getConfig(sprintf('providers.%s.authParams', $request->getParam('provider')), []);
+        $location = $provider->getAuthorizationUrl($authParams);
         
-        $this->dispatchEvent(UsersAuthComponent::EVENT_BEFORE_SOCIAL_LOGIN_REDIRECT, compact('authParams', 'request'));
+        $this->dispatchEvent(UsersAuthComponent::EVENT_BEFORE_SOCIAL_LOGIN_REDIRECT, compact('location', 'request'));
 
-        $response = $response->withLocation($provider->getAuthorizationUrl($authParams));
-
-        return $response;
+        return $response->withLocation($location);
     }
 
     /**
