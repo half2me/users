@@ -40,6 +40,10 @@ trait LinkSocialTrait
             $this->request->getSession()->write('temporary_credentials', $temporaryCredentials);
         }
         $authUrl = $provider->getAuthorizationUrl($temporaryCredentials);
+        $this->dispatchEvent(UsersAuthComponent::EVENT_BEFORE_SOCIAL_LOGIN_REDIRECT, [
+            'location' =>$authUrl,
+            'request' => $this->getRequest(),
+        ]);
         if (empty($temporaryCredentials)) {
             $this->request->session()->write('SocialLink.oauth2state', $provider->getState());
         }
