@@ -15,6 +15,7 @@ use CakeDC\Users\Model\Table\SocialAccountsTable;
 use Cake\Core\Configure;
 use Cake\Http\Exception\NotFoundException;
 use League\OAuth1\Client\Server\Twitter;
+use CakeDC\Users\Controller\Component\UsersAuthComponent;
 
 /**
  * Ações para "linkar" contas sociais
